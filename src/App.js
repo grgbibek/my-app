@@ -44,7 +44,7 @@ class App extends Component {
     persons[personIndex] = person; //updating an object into the class array
 
     console.log( "Persons" + persons);
-    //updating the persons array by new array which consist of updated name
+    //updating the persons array by new array which consist of updated name  
     this.setState ({
       persons : persons
     })
