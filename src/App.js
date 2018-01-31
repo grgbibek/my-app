@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
+
 import './App.css';
 import Person from './Person/Person';
 
@@ -44,7 +46,7 @@ class App extends Component {
     persons[personIndex] = person; //updating an object into the class array
 
     console.log( "Persons" + persons);
-    //updating the persons array by new array which consist of updated name  
+    //updating the persons array by new array which consist of updated name
     this.setState ({
       persons : persons
     })
@@ -67,11 +69,16 @@ class App extends Component {
   render() {
     //creating inline css for button
     const styleButton = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover' : {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let person= null;
@@ -89,12 +96,33 @@ class App extends Component {
           }
         </div>
       );
+
+      styleButton.backgroundColor = 'red';
+      styleButton[':hover'] = {
+        backgroundColor: 'salmon',
+          color: 'black'
+      }
+    }
+
+    //adding more than one css style('red bold')
+    // let classes = ['red','bold'].join(' ');
+
+    // adding styles dynamically
+    let classes= [];
+
+    if(this.state.persons.length <=2){
+      classes.push('red');  //classes = 'red';
+    }
+
+    if(this.state.persons.length <=1){
+      classes.push('bold'); //classes = 'bold';
     }
 
     return (
 
       <div className="App">
         <h1>Hi ! I am a React Developer</h1>
+        <h2 className={classes.join(' ')}> This must have changed!!</h2>
         <button style= {styleButton} onClick={this.toggleNameHandler} >Toggle Persons</button>
         {person}
       </div>
@@ -102,4 +130,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
